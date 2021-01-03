@@ -1,0 +1,43 @@
+{% extends "base.html" %} 
+{% block content %}
+<style>
+    body {
+        font-family: "Roboto", sans-serif;
+        font-size: 18px;
+        background-color: #fdfdfd;
+    }
+    
+    .head_text {
+        color: white;
+    }
+    
+    .card {
+        box-shadow: 0 16px 48px #E3E7EB;
+    }
+</style>
+<div class="container mt-3">
+    <div class="row">
+    <div class="col-md-12">
+        <h5>Latest Posts 
+            <span class="float-right">
+            <a href="#" class="btn btn-sm btn-dark">Add new</a>
+            </span> 
+        </h5>
+        <hr>
+    </div>
+        <!-- Blog Entries Column -->
+        <div class="col-md-12 mt-2">
+          {% for post in post_list %}
+          
+          <a href="{% url 'post_detail' post.slug  %}"> <h5 class="text-dark font-weight-bold">{{post.title}}</h5></a>
+                     <p class="text-muted" style="font-size:small">{{ post.author }} | {{ post.created_on}} </p>
+                    <p class="text-muted">{{post.content|slice:":200" }} ...</p>
+                    <a href="{% url 'post_detail' post.slug  %}" class="btn btn-outline-dark btn-sm">Read More &rarr;</a>
+           <hr>
+            {% endfor %}
+        </div>
+        {% block sidebar %} 
+         {% endblock sidebar %}
+    </div>
+</div>
+{%endblock%}
